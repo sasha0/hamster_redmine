@@ -1,0 +1,2 @@
+hamster-redmine
+===============
