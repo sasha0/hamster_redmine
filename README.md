@@ -1,9 +1,6 @@
 # Hamster-redmine
 
-Hamster-redmine is a simple command-line script, which helps to synchronize tracked time from `Hamster`_ time tracker to `Redmine`_ project management application. Script heavily uses hamster's API and for now needs to run from same user as hamster-indicator.
-
-.. _Hamster: http://projecthamster.wordpress.com/
-.. _Redmine: http://www.redmine.org/
+Hamster-redmine is a simple command-line script, which helps to synchronize tracked time from [Hamster](http://projecthamster.wordpress.com/) time tracker to [Redmine](http://www.redmine.org/) project management application. Script heavily uses hamster's API and for now needs to run from same user as hamster-indicator.
 
 # Configuration
 
@@ -28,5 +25,3 @@ Or you can synchronize all time entries later September 1, 2013:
 ```bash
 python hamster-indicator -f 2013-09-01 -s
 ```
-
-
