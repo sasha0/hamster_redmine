@@ -42,7 +42,7 @@ if getattr(options, 'from_date', None):
     end_date = datetime.date.today()
     facts = runtime.storage.get_facts(date, end_date)
 
-if getattr(options, 'from_date', None) and getattr(options, 'till_date', None):
+if getattr(options, 'from_date', None) and getattr(options, 'until_date', None):
     from_date = getattr(options, 'from_date', None)
     till_date = getattr(options, 'until_date', None)
     date = datetime.datetime.strptime(from_date, '%Y-%m-%d')
