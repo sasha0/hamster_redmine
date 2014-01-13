@@ -20,6 +20,7 @@ parser.add_option('-s', '--synchronize', dest='synchronize', action='store_true'
 
 facts = []
 
+# getting list of so called "facts" from Hamster, which correspond to tracked time in Redmine
 if getattr(options, 'today', None):
     facts = runtime.storage.get_todays_facts()
 
@@ -52,17 +53,22 @@ if getattr(options, 'from_date', None) and getattr(options, 'until_date', None):
 if not getattr(options, 'from_date', None) and getattr(options, 'until_date', None):
     print 'Please provide start date option, for instance: python hamster-redmine.py -t 2013-10-20'
 
-
 if facts:
     tasks = {}
     for fact in facts:
+        # aggregating tasks data, implying that Redmine's task ID stored in "activity" field of Hamster
         task = {'fact_id': int(fact.id), 'task_id': fact.activity,
                 'duration': round(fact.delta.seconds / 3600.0, 2)}
+        
         if not tasks.get(fact.date, None):
             tasks[fact.date] = [task]
         else:
             tasks[fact.date].append(task)
+    
+    # depends on option, synchronizing aggregated tasks data or just displaying results
     if getattr(options, 'synchronize', None):
         _synchronize_tasks(tasks)
     else:
         _check_tasks(tasks)
+else:
+    print 'No activity found.'
