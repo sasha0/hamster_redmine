@@ -63,9 +63,8 @@ def _get_time_entry_activity():
 def _log_sync(task_id, fact_ids):
     """Adding entry to sychronization log model."""
     
-    for fact_id in fact_ids:
-        new_time_entry = SyncLog(fact_id=fact_id, task_id=task_id)
-        session.add(new_time_entry)
+    entries = [SyncLog(fact_id=fact_id, task_id=task_id) for fact_id in fact_ids]
+    session.add_all(entries)    
     session.commit()
 
 def _sync_task(task_id, fact_ids, activity_id, duration, date):
