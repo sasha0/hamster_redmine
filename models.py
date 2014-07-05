@@ -6,6 +6,7 @@ from sqlalchemy.orm import sessionmaker
 # using SQLite database for log
 engine = create_engine('sqlite:///sync_log.db')
 Base = declarative_base()
+Base.metadata.create_all(engine)
 
 class SyncLog(Base):
     """
@@ -20,6 +21,5 @@ class SyncLog(Base):
     task_id = Column(Integer)   # task ID in Redmine
 
 
-Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()

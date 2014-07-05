@@ -25,3 +25,7 @@ Or you can synchronize all time entries later September 1, 2013:
 ```bash
 python hamster-indicator -f 2013-09-01 -s
 ```
+
+# Requirements
+* [SQLAlchemy](https://github.com/zzzeek/sqlalchemy)
+* [requests](https://github.com/kennethreitz/requests)
