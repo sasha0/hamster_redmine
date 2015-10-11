@@ -3,11 +3,11 @@
 import calendar
 import datetime
 from optparse import OptionParser
+import sys
+
 from hamster.configuration import runtime
-import requests
-import configuration
-from models import session, SyncLog
-from utils import _check_tasks, _synchronize_tasks
+
+from utils import check_tasks, synchronize_tasks
 
 parser = OptionParser(add_help_option=False)
 parser.add_option('-t', '--today', dest='today', action='store_true')
@@ -26,8 +26,8 @@ if getattr(options, 'today', None):
 
 if getattr(options, 'weekly'):
     t = datetime.date.today()
-    date = t + datetime.timedelta(days = 0 - t.weekday())
-    end_date = t + datetime.timedelta(days = 6 - t.weekday())
+    date = t + datetime.timedelta(days=(0 - t.weekday()))
+    end_date = t + datetime.timedelta(days=(6 - t.weekday()))
     facts = runtime.storage.get_facts(date, end_date)
     
 if getattr(options, 'monthly', None):
@@ -51,7 +51,7 @@ if getattr(options, 'from_date', None) and getattr(options, 'until_date', None):
     facts = runtime.storage.get_facts(date, end_date)
     
 if not getattr(options, 'from_date', None) and getattr(options, 'until_date', None):
-    print 'Please provide start date option, for instance: python hamster-redmine.py -t 2013-10-20'
+    sys.stdout.write('Please provide start date option, for instance: python hamster_redmine.py -t 2013-10-20.\n')
 
 if facts:
     tasks = {}
@@ -67,8 +67,8 @@ if facts:
     
     # depends on option, synchronizing aggregated tasks data or just displaying results
     if getattr(options, 'synchronize', None):
-        _synchronize_tasks(tasks)
+        synchronize_tasks(tasks)
     else:
-        _check_tasks(tasks)
+        check_tasks(tasks)
 else:
-    print 'No activity found.'
+    sys.stdout.write('No activity found.\n')

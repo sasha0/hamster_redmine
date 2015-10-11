@@ -17,13 +17,13 @@ By default, script checks logs for existing time entry - so if it exists, no nee
 For instance, you can check if all of your weekly tasks are synchronized with Redmine:  
 
 ```bash
-python hamster-indicator -w
+python hamster_redmine.py -w
 ```
 
 Or you can synchronize all time entries later September 1, 2013:
 
 ```bash
-python hamster-indicator -f 2013-09-01 -s
+python hamster_redmine.py -f 2013-09-01 -s
 ```
 
 # Requirements
